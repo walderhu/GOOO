@@ -2,6 +2,7 @@
 #define TIC_TAC_TOE_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 typedef struct
 {
@@ -40,7 +41,7 @@ typedef struct
 #define FALSE 0                          // мб убрать
 int lobby(char **board, GAME_t *status); // начальное лобби игры
 void draw_board(char **board, GAME_t *status);
-void won(char **board, GAME_t status);
+void won(char **board, GAME_t *status);
 int input(char **board, GAME_t *status);
 // для реализации pvp
 char **table(int);

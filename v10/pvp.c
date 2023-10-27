@@ -50,21 +50,39 @@ int input_pvp(char **board)
         while (TRUE)
         {
             printf("Answer: ");
-            if (scanf("%f", &x) == TRUE && x == (int)x && (x == EXIT || (x >= 1 && x <= BOARD_SIZE)))
+            if (scanf("%f", &x) == TRUE && x == (int)x && (x == EXIT || (x >= 1 && x <= BOARD_SIZE)) )
                 break;
             // Clear input buffer
             while (getchar() != '\n')
                 ;
-            printf("Invalid input, try again!\n");
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//для очистки последнего сообщения
+printf("\033[2K"); // Clear the current line
+printf("\033[1A"); // Move the cursor up one line
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+printf("Invalid input, try again!\n");
+sleep(1);
+printf("\033[1A"); // Move the cursor up one line
+printf("\033[2K"); // Clear the current line
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
         if (x == EXIT)
             return EXIT;
 
-        if (scanf("%f", &y) == TRUE && y == (int)y && (x == EXIT || (y >= 1 && y <= BOARD_SIZE) && board[(int)x - 1][(int)y - 1] == EMPTY_SPACE))
+        if (scanf("%f", &y) == TRUE && y == (int)y && (x == EXIT || (y >= 1 && y <= BOARD_SIZE) && board[(int)x - 1][(int)y - 1] == EMPTY_SPACE)&& (getchar() == '\n' || getchar() == ' ')) 
             break;
         while (getchar() != '\n')
             ;
-        printf("Invalid input, try again!\n");
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//для очистки последнего сообщения
+printf("\033[2K"); // Clear the current line
+printf("\033[1A"); // Move the cursor up one line
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+printf("Invalid input, try again!\n");
+sleep(1);
+printf("\033[1A"); // Move the cursor up one line
+printf("\033[2K"); // Clear the current line
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     } while (TRUE);
     board[(int)x - 1][(int)y - 1] = ((queue) % 2 == 0) ? 'X' : 'O';
     queue++;
