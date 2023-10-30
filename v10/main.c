@@ -12,8 +12,10 @@ int main()
             else
                 draw_board(board, &status);
 
-        if (!(status.menu == EXIT_TO_LOBBY || EXIT_THE_GAME))
+        if (status.menu != EXIT_TO_LOBBY || status.menu != EXIT_THE_GAME)
+        {
             won(board, &status);
+        }
     }
     table(DELETE);
     return 0;
@@ -21,32 +23,33 @@ int main()
 
 int lobby(char **board, GAME_t *status)
 {
-status->menu = 0;
-system("clear");
-printf("\t\t\tTIC TAC TOE\n");
+    status->menu = 0;
+    system("clear");
+    printf("\t\t\tTIC TAC TOE\n");
 
-printf("Select the game mode:\n %d. Player 1 vs Player 2\n %d. Player vs AI\n%d. To exit\n", PVP, PVE, EXIT);
-//
-float answer;
-while (TRUE)
-{
-printf("Answer: ");
-if (scanf("%f", &answer) && (answer == EXIT || answer == PVE || answer == PVP) && (getchar() == '\n' || getchar() == ' ')) 
-break;
-// Clear input buffer
-while (getchar() != '\n');
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//for clear last message
-printf("\033[2K"); // Clear the current line
-printf("\033[1A"); // Move the cursor up one line
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-printf("Invalid input, try again!\n");
-sleep(1);
-printf("\033[1A"); // Move the cursor up one line
-printf("\033[2K"); // Clear the current line
-}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-system("clear");
+    printf("Select the game mode:\n %d. Player 1 vs Player 2\n %d. Player vs AI\n%d. To exit\n", PVP, PVE, EXIT);
+    //
+    float answer;
+    while (TRUE)
+    {
+        printf("Answer: ");
+        if (scanf("%f", &answer) && (answer == EXIT || answer == PVE || answer == PVP) && (getchar() == '\n' || getchar() == ' '))
+            break;
+        // Clear input buffer
+        while (getchar() != '\n')
+            ;
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // for clear last message
+        printf("\033[2K"); // Clear the current line
+        printf("\033[1A"); // Move the cursor up one line
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        printf("Invalid input, try again!\n");
+        sleep(1);
+        printf("\033[1A"); // Move the cursor up one line
+        printf("\033[2K"); // Clear the current line
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    system("clear");
 
     if (answer == PVP)
         printf("The Player vs player mode is selected\n");
@@ -91,7 +94,7 @@ void won(char **board, GAME_t *status)
     switch (status->game)
     {
     case EXIT:
-    printf("\tExit...\n");
+        printf("\tExit...\n");
         break;
     case PVE:
         switch (evaluate(board))
@@ -103,7 +106,7 @@ void won(char **board, GAME_t *status)
             printf("Human won!\n");
             break;
         case DRAW:
-            printf("Draw!\n");
+            // printf("Draw!\n");
             break;
         }
         break;
@@ -118,10 +121,12 @@ void won(char **board, GAME_t *status)
             printf("O won!\n");
             break;
         case NOBODY:
-            printf("Draw!\n");
+            // printf("Draw!\n");
             break;
         }
         break;
     }
+    sleep(1);
     status->menu = menu();
+    // status->menu = EXIT_TO_LOBBY;
 }

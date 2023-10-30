@@ -13,21 +13,21 @@ int menu()
     while (TRUE)
     {
         printf("Answer: ");
-        if (scanf("%f", &answer) && answer == (int)answer && (answer == CONTINUE_GAME || answer == START_OVER || answer == EXIT_TO_LOBBY || answer == EXIT_THE_GAME)&& (getchar() == '\n' || getchar() == ' '))
+        if (scanf("%f", &answer) && answer == (int)answer && (answer == CONTINUE_GAME || answer == START_OVER || answer == EXIT_TO_LOBBY || answer == EXIT_THE_GAME) && (getchar() == '\n' || getchar() == ' '))
             break;
         // Clear input buffer
         while (getchar() != '\n')
             ;
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//для очистки последнего сообщения
-printf("\033[2K"); // Clear the current line
-printf("\033[1A"); // Move the cursor up one line
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-printf("Invalid input, try again!\n");
-sleep(1);
-printf("\033[1A"); // Move the cursor up one line
-printf("\033[2K"); // Clear the current line
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // для очистки последнего сообщения
+        printf("\033[2K"); // Clear the current line
+        printf("\033[1A"); // Move the cursor up one line
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        printf("Invalid input, try again!\n");
+        sleep(1);
+        printf("\033[1A"); // Move the cursor up one line
+        printf("\033[2K"); // Clear the current line
+                           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     system("clear");
     return answer;
@@ -63,5 +63,4 @@ int input(char **board, GAME_t *status)
         status->menu = 0;
         // printf("%s mode\n", (status->game == PVP) ? "PVP" : "PVE");
     }
-
 }
